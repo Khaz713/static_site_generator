@@ -3,11 +3,11 @@ from htmlnode import LeafNode
 
 class TextType(Enum):
     TEXT = "text"
-    BOLD = "b"
-    ITALIC = "i"
+    BOLD = "bold"
+    ITALIC = "italic"
     CODE = "code"
-    LINK = "a"
-    IMAGE = "img"
+    LINK = "link"
+    IMAGE = "image"
 
 
 class TextNode:
@@ -30,12 +30,14 @@ def text_node_to_html_node(text_node):
         case text_node.text_type.TEXT:
             return LeafNode(None, text_node.text)
         case text_node.text_type.BOLD:
-            return LeafNode(text_node.text_type.BOLD.value, text_node.text)
+            return LeafNode("b", text_node.text)
         case text_node.text_type.ITALIC:
-            return LeafNode(text_node.text_type.ITALIC.value, text_node.text)
+            return LeafNode("i", text_node.text)
         case text_node.text_type.CODE:
-            return LeafNode(text_node.text_type.CODE.value, text_node.text)
+            return LeafNode("code", text_node.text)
         case text_node.text_type.LINK:
-            return LeafNode(text_node.text_type.LINK.value, text_node.text, {"href": text_node.url})
+            return LeafNode("a", text_node.text, {"href": text_node.url})
         case text_node.text_type.IMAGE:
-            return LeafNode(text_node.text_type.IMAGE.value, "", {"src": text_node.url, "alt": text_node.text})
+            return LeafNode("img", "", {"src": text_node.url, "alt": text_node.text})
+        case _:
+            raise ValueError(f"unsupported TextType: {text_node.text_type}")
