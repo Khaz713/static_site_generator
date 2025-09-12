@@ -2,6 +2,7 @@ import unittest
 
 from textnode import TextNode, TextType, text_node_to_html_node
 
+
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
         text_node1 = TextNode('text', TextType.BOLD)
@@ -46,6 +47,7 @@ class TestTextNode(unittest.TestCase):
         html_node = text_node_to_html_node(node)
         self.assertEqual(html_node.tag, "b")
         self.assertEqual(html_node.value, "This is bold")
+
 
 
 if __name__ == '__main__':
