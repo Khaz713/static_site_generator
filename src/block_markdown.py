@@ -11,10 +11,12 @@ class BlockType(Enum):
     ORDERED = 6
 
 def markdown_to_blocks(markdown):
+    markdown = textwrap.dedent(markdown).strip()
+    markdown = re.sub(r'\n{2,}", "\n\n', '', markdown)
     blocks = markdown.split('\n\n')
     blocks_final =[]
     for block in blocks:
-        block = textwrap.dedent(block).strip()
+        block = block.strip()
         if block != '':
             blocks_final.append(block)
     return blocks_final
