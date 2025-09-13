@@ -1,13 +1,28 @@
-from textnode import TextNode, TextType
-from inline_markdown import split_nodes_delimiter
+import shutil
+import os
+
+def clear_public():
+    shutil.rmtree("public", ignore_errors=True)
+    os.mkdir("public")
+
+def copy_dir_to_public(path):
+    content = os.listdir(path)
+    print(content)
+    for item in content:
+        if os.path.isdir(os.path.join(path, item)):
+            copy_dir_to_public(os.path.join(path, item))
+        if os.path.isfile(os.path.join(path, item)):
+            dir_path = os.path.join(path.replace("static", "public"))
+            file_path = os.path.join(path.replace("static", "public"), item)
+            if not os.path.exists(dir_path):
+                os.mkdir(dir_path)
+            shutil.copy(os.path.join(path, item), file_path)
+
+
+
 
 def main():
-    node = TextNode("This is text with a `code block` word", TextType.TEXT)
-    node2 = TextNode("This is text with a **bold** word", TextType.TEXT)
-    new_nodes = split_nodes_delimiter([node, node2], "`", TextType.CODE)
-    print(new_nodes)
-    new_nodes = split_nodes_delimiter(new_nodes, "**", TextType.BOLD)
-    print(new_nodes)
+    copy_dir_to_public("static")
 
 
 if __name__ == "__main__":
