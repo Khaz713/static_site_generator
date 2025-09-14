@@ -23,7 +23,7 @@ def markdown_to_blocks(markdown):
 
 RE_HEADING = re.compile(r'^#{1,6} [^\n]+$')
 RE_CODE = re.compile(r'^```[\s\S]*?```$', re.DOTALL)
-RE_QUOTE = re.compile(r'^(?:> [^\r\n]+(?:\r?\n)?)+$')
+RE_QUOTE = re.compile(r'^(?:> ?[^\r\n]*(?:\r?\n)?)+$')
 RE_UNORDERED = re.compile(r'^(?:- [^\n]+\n?)+$', re.MULTILINE)
 RE_ORDERED = re.compile(r'^(?:\d+\. [^\n]+\n?)+$', re.MULTILINE)
 

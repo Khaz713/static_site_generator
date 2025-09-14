@@ -105,8 +105,7 @@ class TestBlockMarkdown(unittest.TestCase):
 
     def test_quote_allow_empty_quoted_lines(self):
         block = "> line\n> \n> next"
-        # If you disallow empty lines in your impl, change expected to PARAGRAPH
-        self.assertEqual(block_to_block_type(block), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type(block), BlockType.QUOTE)
 
     # Unordered list
     def test_unordered_basic(self):

@@ -1,6 +1,6 @@
 import unittest
 from markdown_to_html_node import markdown_to_html_node
-from htmlnode import *
+from generate_page import extract_title
 
 class TestMarkdownToHTMLNode(unittest.TestCase):
 
@@ -101,3 +101,9 @@ class TestMarkdownToHTMLNode(unittest.TestCase):
             html,
             "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
         )
+
+    def test_extract_title(self):
+        md = "# Title1 "
+        self.assertEqual(extract_title(md), "Title1")
+        md = "## Title2"
+        self.assertRaises(Exception, extract_title, md)

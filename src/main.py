@@ -1,5 +1,6 @@
 import shutil
 import os
+from generate_page import generate_pages_recursive
 
 def clear_public():
     shutil.rmtree("public", ignore_errors=True)
@@ -7,7 +8,6 @@ def clear_public():
 
 def copy_dir_to_public(path):
     content = os.listdir(path)
-    print(content)
     for item in content:
         if os.path.isdir(os.path.join(path, item)):
             copy_dir_to_public(os.path.join(path, item))
@@ -22,8 +22,9 @@ def copy_dir_to_public(path):
 
 
 def main():
+    clear_public()
     copy_dir_to_public("static")
-
+    generate_pages_recursive("content", "template.html", "public")
 
 if __name__ == "__main__":
     main()
