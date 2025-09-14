@@ -28,7 +28,7 @@ def main():
         basepath = sys.argv[1]
     clear("docs")
     copy_dir_to("static", "docs")
-    print(sys.argv)
+    print(basepath)
     generate_pages_recursive("content", "template.html", "docs", basepath)
 
 if __name__ == "__main__":
